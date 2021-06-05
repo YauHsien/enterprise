@@ -1,0 +1,32 @@
+version: "3.3"
+services:
+  #
+  data_persistency:
+    image: enterprise/v0/dpersistency
+    build:
+      context: .
+      dockerfile: data_persistency.dockerfile
+    container_name: enterprise.v0.db.persistency
+    command: erl -noshell -heart -async_shell_start -name host@enterprise.v0.db.persistency -setcookie enterprise.v0 -pz /parrent/app/_build/default/lib/data_persistency/ebin -pz /parrent/app/_build/default/lib/poolboy/ebin -pz /parrent/app/_build/default/lib/rebar/ebin -pz /parrent/app/_build/default/lib/epgsql/ebin -eval "application:start(data_persistency)"
+    environment:
+      - DATABASE=enterprise_v0
+      - DB_USER=euser
+      - DB_PASS=123@123@123
+      - DB_PORT=5432
+      - DB_HOST=enterprise.v0.db
+      - POOLSIZE=90
+    depends_on:
+      - db
+  #
+  db:
+    image: enterprise/v0/db
+    build:
+      context: .
+      dockerfile: db.dockerfile
+    container_name: enterprise.v0.db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123@123@123
+      - POSTGRES_DB=postgres
+    ports:
+      - "8005:5432"
