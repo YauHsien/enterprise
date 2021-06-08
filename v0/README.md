@@ -52,3 +52,7 @@
 - Class `Commodity` 代表每一件具體的貨品，除了有定價之外，還有成交價 `actual price` 、配送結果與物品狀態
 
 ![圖：產品清單與客戶銷售紀錄](design/listings_n_shipping.png "產品清單與客戶銷售紀錄")
+
+本系統主責為銷售後勤系統，結構大都為了補充存貨，而由文件式採購計畫而產生採購單，收錄發票，規劃貨運入庫。如圖，
+
+![圖：存貨與採購](design/stock_keeping_n_purchasing.png "存貨與採購")
